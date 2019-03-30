@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1553917620 source:g:\utn\programacion_laboratorio 1\trabajos_practicos\tp_1\tp_1\utn.c
+	<stdio.h>
+
+1553921111 source:g:\utn\programacion_laboratorio 1\trabajos_practicos\tp_1\tp_1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+
+1553917620 g:\utn\programacion_laboratorio 1\trabajos_practicos\tp_1\tp_1\utn.h
+
