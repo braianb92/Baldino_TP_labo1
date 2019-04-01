@@ -208,12 +208,24 @@ int utn_multiplyNum (int numA, int numB, char* resultMsg)
     return 0;
 }
 
-int utn_calculateAll(int numA, int numB, char* msgE)
+long utn_factorial (int numA)
 {
-    utn_sumNum(numA, numB, "");
-    utn_restNum(numA, numB,"");
-    utn_divideNum(numA, numB, "","");
-    utn_multiplyNum(numA, numB, "");
+    int i;
+    long result=1;
+
+    for(i=0; i<=numA; i++)
+    {
+        result = result * i;
+    }
+    return 0;
+}
+
+int utn_calculateAll(int numA, int numB)
+{
+    utn_sumNum(numA, numB, "La suma es: ");
+    utn_restNum(numA, numB,"La resta es: ");
+    utn_divideNum(numA, numB, "La division es: ","No se permite la division por 0");
+    utn_multiplyNum(numA, numB, "La multiplicacion es: ");
 
     return 0;
 }

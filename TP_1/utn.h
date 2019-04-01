@@ -9,6 +9,7 @@ int utn_sumNum (int numA, int numB, char* resultMsg);
 int utn_restNum (int numA, int numB, char* resultMsg);
 int utn_divideNum (int numA, int numB, char* resultMsg, char* msgE);
 int utn_multiplyNum (int numA, int numB, char* resultMsg);
-int utn_calculateAll(int numA, int numB, char* msgE);
+long utn_factorial (int numA);
+int utn_calculateAll(int numA, int numB);
 
 #endif // UTN_H_INCLUDED

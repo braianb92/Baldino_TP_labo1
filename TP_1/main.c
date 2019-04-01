@@ -44,9 +44,11 @@ int main()
                 utn_multiplyNum(A,B,"La multiplicacion es: ");
                 break;
             case 7:
+                utn_factorial(A);
+                printf("El factorial de: %d! = %1d\n",A,utn_factorial(A));
                 break;
             case 8:
-                utn_calculateAll(A,B,"");
+                utn_calculateAll(A,B);
                 break;
             case 9:
                 seguir = 'n';
