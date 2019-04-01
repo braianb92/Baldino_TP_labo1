@@ -8,7 +8,6 @@ int main()
     int opcion=0;
     int A;
     int B;
-    int result;
 
     while(seguir=='s')
     {
@@ -27,33 +26,32 @@ int main()
         switch(opcion)
         {
             case 1:
-                A=utn_getInt(&A,"Ingresar 1er operando: ","Error. ");
+                utn_getInt(&A,"Ingrese 1er operando: ","Error ");
                 break;
             case 2:
-                B=utn_getInt(&B,"Ingresar 2edo operando: ","Error. ");
+                utn_getInt(&B,"Ingrese 2do operando: ","Error ");
                 break;
             case 3:
-                result=utn_sumNum(A,B);
+                utn_sumNum(A,B,"La suma es: ");
                 break;
             case 4:
-                result=utn_restNum(A,B);
+                utn_restNum(A,B,"La resta es: ");
                 break;
             case 5:
-                result=utn_divideNum(A,B);
+                utn_divideNum(A,B,"La division es: ","No se permite la division por 0");
                 break;
             case 6:
-                result=utn_multiplyNum(A,B);
+                utn_multiplyNum(A,B,"La multiplicacion es: ");
                 break;
             case 7:
                 break;
             case 8:
+                utn_calculateAll(A,B,"");
                 break;
             case 9:
                 seguir = 'n';
                 break;
         }
     }
-    printf("Eligio la opcion: %d\nEl resultado es: %.2f",opcion,(float)result);
-
     return 0;
 }

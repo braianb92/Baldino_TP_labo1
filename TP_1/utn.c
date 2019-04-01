@@ -45,7 +45,7 @@ int utn_getIntRange (int* pNum, int max, int min,char* msg,char* msgE, int tries
 *\param tries Numero de intentos para verificar la validacion
 *\return 0 si esta bien, -1 si esta mal
 */
-float utn_getFloatRange (float* pNum, int max, int min,char* msg,char* msgE,int tries)
+float utn_getFloatMaxMin (float* pNum, int max, int min,char* msg,char* msgE,int tries)
 {
     float number;
     int ret=-1;
@@ -138,13 +138,14 @@ float utn_getFloat (float *pNum, char* msg, char* msgE)
 *\param numB Segundo valor a sumar
 *\return El resultado de la sumatoria
 */
-int utn_sumNum (int numA, int numB)
+int utn_sumNum (int numA, int numB, char* resultMsg)
 {
     int result;
 
     result=numA+numB;
+    printf("%s%.2f\n",resultMsg,(float)result);
 
-    return result;
+    return 0;
 }
 
 /**
@@ -153,13 +154,14 @@ int utn_sumNum (int numA, int numB)
 *\param numB Segundo valor a restar
 *\return El resultado de la resta
 */
-int utn_restNum (int numA, int numB)
+int utn_restNum (int numA, int numB, char* resultMsg)
 {
     int result;
 
     result=numA-numB;
+    printf("%s%.2f\n",resultMsg,(float)result);
 
-    return result;
+    return 0;
 }
 
 /**
@@ -168,19 +170,26 @@ int utn_restNum (int numA, int numB)
 *\param numB Divisor
 *\return El resultado de la division
 */
-int utn_divideNum (int numA, int numB)
+int utn_divideNum (int numA, int numB,char* resultMsg, char* msgE)
 {
     int result;
 
-    if(numA!=0 || numB!=0)
+    if(numA!=0 && numB!=0)
     {
         result=numA/numB;
+        printf("%s%.2f\n",resultMsg,(float)result);
+    }
+    else if(numA==0)
+    {
+        result=0;
+        printf("%s%.2f\n",resultMsg,(float)result);
     }
     else
     {
-        result=0;
+        printf("%s\n",msgE);
+
     }
-    return result;
+    return 0;
 }
 
 /**
@@ -189,11 +198,22 @@ int utn_divideNum (int numA, int numB)
 *\param numB Segundo valor a multiplicar
 *\return El resultado de la multiplicacion
 */
-int utn_multiplyNum (int numA, int numB)
+int utn_multiplyNum (int numA, int numB, char* resultMsg)
 {
     int result;
 
     result=numA*numB;
+    printf("%s%.2f\n",resultMsg,(float)result);
 
-    return result;
+    return 0;
+}
+
+int utn_calculateAll(int numA, int numB, char* msgE)
+{
+    utn_sumNum(numA, numB, "");
+    utn_restNum(numA, numB,"");
+    utn_divideNum(numA, numB, "","");
+    utn_multiplyNum(numA, numB, "");
+
+    return 0;
 }
