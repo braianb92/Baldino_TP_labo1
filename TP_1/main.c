@@ -17,7 +17,7 @@ int main()
         printf("4- Calcular la resta (A-B)\n");
         printf("5- Calcular la division (A/B)\n");
         printf("6- Calcular la multiplicacion (A*B)\n");
-        printf("7- Calcular el factorial (A!)\n");
+        printf("7- Calcular el factorial (A!) (B!)\n");
         printf("8- Calcular todas las operacione\n");
         printf("9- Salir\n");
 
@@ -27,29 +27,45 @@ int main()
         {
             case 1:
                 utn_getInt(&A,"Ingrese 1er operando: ","Error ");
+                printf("A=%d\n",A);
                 break;
             case 2:
                 utn_getInt(&B,"Ingrese 2do operando: ","Error ");
+                printf("A=%d\n",A);
+                printf("B=%d\n",B);
                 break;
             case 3:
-                utn_sumNum(A,B,"La suma es: ");
+                utn_sumNum(A,B,"El resultado de A+B es: ");
+                printf("A=%d\n",A);
+                printf("B=%d\n",B);
                 break;
             case 4:
-                utn_restNum(A,B,"La resta es: ");
+                utn_restNum(A,B,"El resultado de A-B es:  ");
+                printf("A=%d\n",A);
+                printf("B=%d\n",B);
                 break;
             case 5:
-                utn_divideNum(A,B,"La division es: ","No se permite la division por 0");
+                utn_divideNum(A,B,"El resultado de A/B es:  ","No se permite la division por 0");
+                printf("A=%d\n",A);
+                printf("B=%d\n",B);
                 break;
             case 6:
-                utn_multiplyNum(A,B,"La multiplicacion es: ");
+                utn_multiplyNum(A,B,"El resultado de A*B es:  ");
+                printf("A=%d\n",A);
+                printf("B=%d\n",B);
                 break;
             case 7:
                 utn_factorial(A);
-                printf("El factorial de: %d! = %d\n",A,utn_factorial(A));
+                utn_factorial(B);
+                printf("A=%d\n",A);
+                printf("B=%d\n",B);
+                printf("El resultado de A! es: %d\nEl resultado de B! es: %d\n",utn_factorial(A),utn_factorial(B));
                 break;
             case 8:
                 utn_calculateAll(A,B);
-                printf("El factorial de: %d! = %d\n",A,utn_factorial(A));
+                printf("A=%d\n",A);
+                printf("B=%d\n",B);
+                printf("El resultado de A! es: %d\nEl resultado de B! es: %d\n",utn_factorial(A),utn_factorial(B));
                 break;
             case 9:
                 seguir = 'n';

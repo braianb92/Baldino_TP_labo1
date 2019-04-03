@@ -1,76 +1,6 @@
 #include <stdio.h>
 
 /**
-*\brief Solicita un numero entero validado dentro de un rango.
-*\param *pNum Puntero de numero pedido al usuario.
-*\param max Maximo del rango
-*\param min Minimo del rango
-*\param msg Mensaje que pide el ingreso del entero
-*\param msgE Mensaje que se muestra si el dato ingresado no es valido
-*\param tries Numero de intentos para verificar la validacion
-*\return 0 si esta bien, -1 si esta mal
-*/
-int utn_getIntRange (int* pNum, int max, int min,char* msg,char* msgE, int tries)
-{
-    int number;
-    int ret=-1;
-
-    while(tries>0)
-    {
-        printf("%s",msg);
-        if(scanf("%d",&number)==1)
-        {
-            if(number<max && number>min)
-            {
-                *pNum=number;
-                ret=0;
-                break;
-            }
-            tries--;
-            printf("%s",msgE);
-        }
-        fflush(stdin);
-        //fpurge(stdin);
-    }
-    return ret;
-}
-
-/**
-*\brief Solicita un numero flotante validado dentro de un rango.
-*\param *pNum Puntero de numero pedido al usuario.
-*\param max Maximo del rango
-*\param min Minimo del rango
-*\param msg Mensaje que pide el ingreso del flotante
-*\param msgE Mensaje que se muestra si el dato ingresado no es valido
-*\param tries Numero de intentos para verificar la validacion
-*\return 0 si esta bien, -1 si esta mal
-*/
-float utn_getFloatMaxMin (float* pNum, int max, int min,char* msg,char* msgE,int tries)
-{
-    float number;
-    int ret=-1;
-
-    while(tries>0)
-    {
-        printf("%s",msg);
-        if(scanf("%f",&number)==1)
-        {
-            if(number<max && number>min)
-            {
-                *pNum=number;
-                ret=0;
-                break;
-            }
-            tries--;
-            printf("%s",msgE);
-        }
-        //fpurge(stdin);
-        fflush(stdin);
-    }
-    return ret;
-}
-
-/**
 *\brief Solicita al usuario un numero entero
 *\param *pNum Puntero de numero pedido al usuario
 *\param msg Mensaje que pide el ingreso del entero
@@ -136,7 +66,8 @@ float utn_getFloat (float *pNum, char* msg, char* msgE)
 *\brief Funcion que suma dos valores
 *\param numA Primer valor a sumar
 *\param numB Segundo valor a sumar
-*\return El resultado de la sumatoria
+*\param resultMsg Mensaje relacionado al resultado de la funcion
+*\return 0
 */
 int utn_sumNum (int numA, int numB, char* resultMsg)
 {
@@ -152,7 +83,8 @@ int utn_sumNum (int numA, int numB, char* resultMsg)
 *\brief Funcion que resta dos valores
 *\param numA Primer valor a restar
 *\param numB Segundo valor a restar
-*\return El resultado de la resta
+*\param resultMsg Mensaje relacionado al resultado de la funcion
+*\return 0
 */
 int utn_restNum (int numA, int numB, char* resultMsg)
 {
@@ -168,7 +100,9 @@ int utn_restNum (int numA, int numB, char* resultMsg)
 *\brief Funcion que divide dos valores
 *\param numA Dividendo
 *\param numB Divisor
-*\return El resultado de la division
+*\param resultMsg Mensaje relacionado al resultado de la funcion
+*\param msgE Mensaje que avisa que la division por 0 no es posible.
+*\return 0
 */
 int utn_divideNum (int numA, int numB,char* resultMsg, char* msgE)
 {
@@ -196,7 +130,8 @@ int utn_divideNum (int numA, int numB,char* resultMsg, char* msgE)
 *\brief Funcion que multiplica dos valores
 *\param numA Primer valor a multiplicar
 *\param numB Segundo valor a multiplicar
-*\return El resultado de la multiplicacion
+*\param resultMsg Mensaje relacionado al resultado de la funcion
+*\return 0
 */
 int utn_multiplyNum (int numA, int numB, char* resultMsg)
 {
@@ -208,6 +143,11 @@ int utn_multiplyNum (int numA, int numB, char* resultMsg)
     return 0;
 }
 
+/**
+*\brief Funcion que multiplica dos valores
+*\param numA operando
+*\return resultado
+*/
 int utn_factorial (int numA)
 {
     int result;
@@ -220,13 +160,20 @@ int utn_factorial (int numA)
     return (result);
 }
 
+/**
+*\brief Funcion que calcula suma, resta, division, multiplicacion y factorial
+*\param numA Primer operando
+*\param numB Segundo operando
+*\return 0
+*/
 int utn_calculateAll(int numA, int numB)
 {
-    utn_sumNum(numA, numB, "La suma es: ");
-    utn_restNum(numA, numB,"La resta es: ");
-    utn_divideNum(numA, numB, "La division es: ","No se permite la division por 0");
-    utn_multiplyNum(numA, numB, "La multiplicacion es: ");
+    utn_sumNum(numA, numB, "El resultado de A+B es: ");
+    utn_restNum(numA, numB,"El resultado de A-B es: ");
+    utn_divideNum(numA, numB, "El resultado de A/B es: ","No se permite la division por 0");
+    utn_multiplyNum(numA, numB, "El resultado de A*B es: ");
     utn_factorial(numA);
+    utn_factorial(numB);
 
     return 0;
 }
