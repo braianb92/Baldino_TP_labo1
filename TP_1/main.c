@@ -45,10 +45,11 @@ int main()
                 break;
             case 7:
                 utn_factorial(A);
-                printf("El factorial de: %d! = %1d\n",A,utn_factorial(A));
+                printf("El factorial de: %d! = %d\n",A,utn_factorial(A));
                 break;
             case 8:
                 utn_calculateAll(A,B);
+                printf("El factorial de: %d! = %d\n",A,utn_factorial(A));
                 break;
             case 9:
                 seguir = 'n';
