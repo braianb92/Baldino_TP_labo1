@@ -38,7 +38,7 @@ int utn_getInt (int *pNum, char* msg, char* msgE)
 *\param msgE Mensaje que se muestra si el dato ingresado no es valido
 *\return 0 si esta bien, -1 si esta mal
 */
-float utn_getFloat (float *pNum, char* msg, char* msgE)
+int utn_getFloat (float *pNum, char* msg, char* msgE)
 {
     float number;
     int ret=-1;
@@ -69,12 +69,12 @@ float utn_getFloat (float *pNum, char* msg, char* msgE)
 *\param resultMsg Mensaje relacionado al resultado de la funcion
 *\return 0
 */
-int utn_sumNum (int numA, int numB, char* resultMsg)
+int utn_sumNum (float numA, float numB, char* resultMsg)
 {
-    int result;
+    float result;
 
     result=numA+numB;
-    printf("%s%.2f\n",resultMsg,(float)result);
+    printf("%s%.2f\n",resultMsg,result);
 
     return 0;
 }
@@ -86,12 +86,12 @@ int utn_sumNum (int numA, int numB, char* resultMsg)
 *\param resultMsg Mensaje relacionado al resultado de la funcion
 *\return 0
 */
-int utn_restNum (int numA, int numB, char* resultMsg)
+int utn_restNum (float numA, float numB, char* resultMsg)
 {
-    int result;
+    float result;
 
     result=numA-numB;
-    printf("%s%.2f\n",resultMsg,(float)result);
+    printf("%s%.2f\n",resultMsg,result);
 
     return 0;
 }
@@ -104,19 +104,19 @@ int utn_restNum (int numA, int numB, char* resultMsg)
 *\param msgE Mensaje que avisa que la division por 0 no es posible.
 *\return 0
 */
-int utn_divideNum (int numA, int numB,char* resultMsg, char* msgE)
+int utn_divideNum (float numA, float numB,char* resultMsg, char* msgE)
 {
-    int result;
+    float result;
 
     if(numA!=0 && numB!=0)
     {
         result=numA/numB;
-        printf("%s%.2f\n",resultMsg,(float)result);
+        printf("%s%.2f\n",resultMsg,result);
     }
     else if(numA==0)
     {
         result=0;
-        printf("%s%.2f\n",resultMsg,(float)result);
+        printf("%s%.2f\n",resultMsg,result);
     }
     else
     {
@@ -133,12 +133,12 @@ int utn_divideNum (int numA, int numB,char* resultMsg, char* msgE)
 *\param resultMsg Mensaje relacionado al resultado de la funcion
 *\return 0
 */
-int utn_multiplyNum (int numA, int numB, char* resultMsg)
+int utn_multiplyNum (float numA, float numB, char* resultMsg)
 {
-    int result;
+    float result;
 
     result=numA*numB;
-    printf("%s%.2f\n",resultMsg,(float)result);
+    printf("%s%.2f\n",resultMsg,result);
 
     return 0;
 }
@@ -148,9 +148,9 @@ int utn_multiplyNum (int numA, int numB, char* resultMsg)
 *\param numA operando
 *\return resultado
 */
-int utn_factorial (int numA)
+int utn_factorial (float numA)
 {
-    int result;
+    float result;
 
     if(numA==1)
     {
@@ -166,7 +166,7 @@ int utn_factorial (int numA)
 *\param numB Segundo operando
 *\return 0
 */
-int utn_calculateAll(int numA, int numB)
+int utn_calculateAll(float numA, float numB)
 {
     utn_sumNum(numA, numB, "El resultado de A+B es: ");
     utn_restNum(numA, numB,"El resultado de A-B es: ");
@@ -175,5 +175,17 @@ int utn_calculateAll(int numA, int numB)
     utn_factorial(numA);
     utn_factorial(numB);
 
+    return 0;
+}
+
+/**
+*\brief Funcion que muestra los valores actuales en el menu
+*\param numA Primer operando
+*\param numB Segundo operando
+*\return 0
+*/
+int utn_showValues(float numA, float numB)
+{
+    printf("A=%.2f\nB=%.2f\n",numA,numB);
     return 0;
 }
