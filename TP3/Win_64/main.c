@@ -68,7 +68,14 @@ int main()
                 }
                 break;
             case 4:
-                controller_editEmployee(listaEmpleados);
+                if(!controller_editEmployee(listaEmpleados))
+                {
+                    printf("\n--La modificacion fue exitosa--\n");
+                }
+                else
+                {
+                    printf("\n--No pudo realizarse la modificacion--\n");
+                }
                 break;
             case 5:
                 controller_removeEmployee(listaEmpleados);
@@ -87,10 +94,24 @@ int main()
                 controller_sortEmployee(listaEmpleados);
                 break;
             case 8:
-                controller_saveAsText("data.csv",listaEmpleados);
+                if(!controller_saveAsText("data.csv",listaEmpleados))
+                {
+                    printf("\n--El archivo se guardo correctamente(modo texto)--\n");
+                }
+                else
+                {
+                    printf("\n--No pudo guardarse el archivo(modo texto)--\n");
+                }
                 break;
             case 9:
-                controller_saveAsBinary("data.csv",listaEmpleados);
+                if(!controller_saveAsBinary("data.csv",listaEmpleados))
+                {
+                    printf("\n--El archivo se guardo correctamente(modo binario--\n");
+                }
+                else
+                {
+                    printf("\n--No pudo guardarse el archivo(modo binario)--\n");
+                }
                 break;
         }
     }while(option != 10);
