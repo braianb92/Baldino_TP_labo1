@@ -72,13 +72,13 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
             cantidad=fread(pe,sizeof(Employee),1,pFile);
             if(cantidad==1)
             {
-
                 ll_add(pArrayListEmployee,pe);
                 retorno=0;
             }
             else
             {
                 employee_delete(pe);
+                retorno=0;
             }
         }
     }while(!feof(pFile));
