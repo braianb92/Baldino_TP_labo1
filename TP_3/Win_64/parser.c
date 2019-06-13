@@ -19,6 +19,7 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
     char bufferSueldo[4096];
     int cantidadDatos;
     Employee *pEmpleado;
+    int retorno=-1;
 
     if(pFile != NULL && pArrayListEmployee!=NULL)
     {
@@ -40,15 +41,15 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
                                                     bufferSueldo);
                 if(pEmpleado != NULL)
                 {
-                    if(ll_add(pArrayListEmployee,pEmpleado))
+                    if(!ll_add(pArrayListEmployee,pEmpleado))
                     {
-                        return 0;
+                        retorno=0;
                     }
                 }
             }
         }while(!feof(pFile));
     }
-    return 1;
+    return retorno;
 }
 
 /** \brief Parsea los datos los datos de los empleados desde el archivo data.csv (modo binario).
@@ -72,8 +73,10 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
             cantidad=fread(pe,sizeof(Employee),1,pFile);
             if(cantidad==1)
             {
-                ll_add(pArrayListEmployee,pe);
-                retorno=0;
+                if(!ll_add(pArrayListEmployee,pe))
+                {
+                    retorno=0;
+                }
             }
             else
             {

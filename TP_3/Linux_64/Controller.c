@@ -23,9 +23,11 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
         pFile = fopen(path,"r");
         if(pFile!=NULL)
         {
-            parser_EmployeeFromText(pFile , pArrayListEmployee);
-            fclose(pFile);
-            retorno=0;
+            if(!parser_EmployeeFromText(pFile , pArrayListEmployee))
+            {
+                fclose(pFile);
+                retorno=0;
+            }
         }
     }
     return retorno;
@@ -45,12 +47,14 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 
     if(pArrayListEmployee!=NULL)
     {
-        pFile=fopen(path,"rb");
+        pFile=fopen(path,"r");
         if(pFile!=NULL)
         {
-            parser_EmployeeFromBinary(pFile,pArrayListEmployee);
-            fclose(pFile);
-            retorno=0;
+            if(!parser_EmployeeFromBinary(pFile,pArrayListEmployee))
+            {
+                fclose(pFile);
+                retorno=0;
+            }
         }
     }
     return retorno;
@@ -124,7 +128,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
                     do
                     {
                         printf("Elija que desea modificar: \n");
-                        printf("1- Nombre del empleado\n,2- Horas que trabajo el empleado\n"
+                        printf("1- Nombre del empleado\n2- Horas que trabajo el empleado\n"
                                "3- Sueldo del empleado\n4- Salir\n");
                         getIntInRange(&option,"Ingrese Opcion: ","DATO NO VALIDO\n",1,4,3);
                         switch (option)
@@ -313,7 +317,7 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
     int size;
     int i;
 
-    FILE* fp=fopen(path,"wb");
+    FILE* fp=fopen(path,"w");
     if(fp!=NULL)
     {
         size=ll_len(pArrayListEmployee);
