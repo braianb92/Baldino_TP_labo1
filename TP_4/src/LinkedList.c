@@ -97,10 +97,10 @@ Node* test_getNode(LinkedList* this, int nodeIndex)
  */
 static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 {
-    int returnAux = -1;
     Node* newNode;
     Node* auxNode;
     int size = ll_len(this);
+    int returnAux = -1;
 
     if(this != NULL && nodeIndex >= 0 && nodeIndex <= size)
     {
@@ -109,25 +109,24 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
         if(newNode != NULL)
         {
             newNode->pElement = pElement;
-            newNode->pNextNode = NULL;
-        }
-        if(nodeIndex == 0)
-        {
-            auxNode = this->pFirstNode;
-            this->pFirstNode = newNode;
-            newNode->pNextNode = auxNode;
-            returnAux = 0;
-            this->size++;
-        }
-        else
-        {
-            auxNode = getNode(this,nodeIndex-1);
-            if(auxNode != NULL)
+            if(nodeIndex == 0)
             {
-                newNode->pNextNode = auxNode->pNextNode;
-                auxNode->pNextNode = newNode;
+                auxNode = this->pFirstNode;
+                this->pFirstNode = newNode;
+                newNode->pNextNode = auxNode;
                 returnAux = 0;
                 this->size++;
+            }
+            else
+            {
+                auxNode = getNode(this,nodeIndex-1);
+                if(auxNode != NULL)
+                {
+                    newNode->pNextNode = auxNode->pNextNode;
+                    auxNode->pNextNode = newNode;
+                    returnAux = 0;
+                    this->size++;
+                }
             }
         }
     }
@@ -160,22 +159,46 @@ int test_addNode(LinkedList* this, int nodeIndex,void* pElement)
 int ll_add(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
+    int size;
+
+    if(this!=NULL)
+    {
+        size=ll_len(this);
+        addNode(this,size,pElement);
+        returnAux=0;
+    }
 
     return returnAux;
 }
 
-/** \brief Permite realizar el test de la funcion addNode la cual es privada
- *
- * \param this LinkedList* Puntero a la lista
- * \param nodeIndex int Ubicacion del elemento a obtener
- * \return void* Retorna    (NULL) Error: si el puntero a la lista es NULL o (si el indice es menor a 0 o mayor al len de la lista)
+/** \brief Retorna un puntero al elemento que se encuentra en el índice especificado. Verificando que el
+*           puntero this sea distinto de NULL y que index sea positivo e inferior al tamaño del array. Si la
+*           verificación falla la función retorna (NULL) y si tiene éxito retorna el elemento.
+*
+* \param this LinkedList* Puntero a la lista
+* \param nodeIndex int Ubicacion del elemento a obtener
+* \return void* Retorna    (NULL) Error: si el puntero a la lista es NULL o (si el indice es menor a 0 o mayor al len de la lista)
                             (pElement) Si funciono correctamente
- *
- */
+*
+*/
 void* ll_get(LinkedList* this, int index)
 {
     void* returnAux = NULL;
+    int size;
+    Node* auxNode;
 
+    if(this!=NULL)
+    {
+        size=ll_len(this);
+        if(index>=0&&index<size)
+        {
+            auxNode=getNode(this,index);
+            if(auxNode!=NULL)
+            {
+                returnAux=auxNode->pElement;
+            }
+        }
+    }
     return returnAux;
 }
 
@@ -192,7 +215,19 @@ void* ll_get(LinkedList* this, int index)
 int ll_set(LinkedList* this, int index,void* pElement)
 {
     int returnAux = -1;
+    int size;
 
+    if(this!=NULL)
+    {
+        size=ll_len(this);
+        if(index>=0&&index<size)
+        {
+            if(!addNode(this,index,pElement))
+            {
+                returnAux=0;
+            }
+        }
+    }
     return returnAux;
 }
 
@@ -208,6 +243,17 @@ int ll_set(LinkedList* this, int index,void* pElement)
 int ll_remove(LinkedList* this,int index)
 {
     int returnAux = -1;
+    int size;
+    Node* auxNode;
+
+    if(this!=NULL)
+    {
+        size=ll_len(this);
+        if(index>=0&&index<size)
+        {
+            auxNode=getNode(this,index);
+        }
+    }
 
     return returnAux;
 }
