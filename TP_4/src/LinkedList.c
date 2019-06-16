@@ -513,18 +513,23 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
     int i;
     Node* auxNode;
 
-    if(this!=NULL&&from>=0&&to>0&&from<to)
+    if(this!=NULL&&from>=0
+       &&to>=0&&from<this->size
+       &&to<=this->size)
     {
         cloneArray=ll_newLinkedList();
-        for(i=from;i<to;i++)
+        if(cloneArray!=NULL)
         {
-            auxNode=ll_get(this,i);
-            if(auxNode!=NULL)
+            for(i=from;i<to;i++)
             {
-                ll_add(cloneArray,auxNode->pElement);
+                auxNode=ll_get(this,i);
+                if(auxNode!=NULL)
+                {
+                    ll_add(cloneArray,auxNode);
+                }
             }
+            return cloneArray;
         }
-        return cloneArray;
     }
     return cloneArray;
 }
@@ -540,7 +545,18 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 LinkedList* ll_clone(LinkedList* this)
 {
     LinkedList* cloneArray = NULL;
-
+    if(this!=NULL)
+    {
+        cloneArray=ll_newLinkedList();
+        if(cloneArray!=NULL)
+        {
+            cloneArray=ll_subList(this,0,this->size);
+            if(cloneArray!=NULL)
+            {
+                return cloneArray;
+            }
+        }
+    }
     return cloneArray;
 }
 
@@ -555,8 +571,41 @@ LinkedList* ll_clone(LinkedList* this)
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 {
     int returnAux =-1;
+    int i;
+    void* pElementoA;
+    void* pElementoB;
+    void* pAuxElemento;
 
+    if(this!=NULL&&pFunc!=NULL
+       &&(order==0||order==1))
+    {
+        for(i=1;i<this->size;i++)
+        {
+            pElementoA=ll_get(this,i-1);
+            pElementoB=ll_get(this,i);
+            if(order==1)
+            {
+                if(pFunc(pElementoA,pElementoB)==1)
+                {
+                    pAuxElemento=pElementoB;
+                    pElementoB=pElementoA;
+                    pElementoA=pAuxElemento;
+                }
+            }
+            else
+            {
+                if(pFunc(pElementoA,pElementoB)==-1)
+                {
+                    pAuxElemento=pElementoB;
+                    pElementoB=pElementoA;
+                    pElementoA=pAuxElemento;
+                }
+            }
+            ll_set(this,i-1,pElementoA);
+            ll_set(this,i,pElementoB);
+        }
+        returnAux =0;
+    }
     return returnAux;
-
 }
 
