@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../inc/LinkedList.h"
+#include "LinkedList.h"
 
 
 static Node* getNode(LinkedList* this, int nodeIndex);
@@ -246,7 +246,6 @@ int ll_remove(LinkedList* this,int index)
     int size;
     Node* auxBNode;
     Node* auxANode;
-
 
     if(this!=NULL)
     {
@@ -606,6 +605,14 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
     return returnAux;
 }
 
+/** \brief Map the elements of the list
+*          according to the criteria function
+*          recieved as parameter.
+* \param   pList LinkedList* Puntero a la lista
+* \param   pFunc (*pFunc) Puntero a la funcion criterio
+* \return  int Retorna  (-1) Error: si el puntero a la listas es NULL
+                        ( 0) Si ok
+ */
 int ll_map(LinkedList* this,int (*pFunc)(void*))
 {
     int i;
@@ -626,6 +633,14 @@ int ll_map(LinkedList* this,int (*pFunc)(void*))
     return retorno;
 }
 
+/** \brief Elimina elementos de la lista segun
+*           se cumpla la funcion criterio
+*           recivida como parametro.
+* \param   pList LinkedList* Puntero a la lista
+* \param   pFunc (*pFunc) Puntero a la funcion criterio
+* \return  int Retorna  (-1) Error: si el puntero a la listas es NULL
+                        ( 0) Si ok
+ */
 int ll_reduce(LinkedList* this,int (*pFunc)(void*))
 {
     int i;
@@ -639,7 +654,7 @@ int ll_reduce(LinkedList* this,int (*pFunc)(void*))
             pElement=ll_get(this,i);
             if(!pFunc(pElement))
             {
-                if(!ll_remove(pElement,i))
+                if(ll_remove(this,i))
                 {
                     i--;
                     retorno=0;
@@ -650,6 +665,15 @@ int ll_reduce(LinkedList* this,int (*pFunc)(void*))
     return retorno;
 }
 
+/** \brief Crea una nueva lista que contiene
+*           solo los elementos que cumplen
+*           con el criterio de la funcion
+*           recivida como parametro
+* \param   pList LinkedList* Puntero a la lista
+* \param   pFunc (*pFunc) Puntero a la funcion criterio
+* \return  int Retorna  (NULL) Error: si el puntero a la listas es NULL
+                        (LinkedList) Si ok
+ */
 LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*))
 {
     int i;
@@ -658,12 +682,16 @@ LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*))
 
     if(this!=NULL)
     {
-        for(i=0;i<ll_len(this);i++)
+        filteredList=ll_newLinkedList();
+        if(filteredList!=NULL)
         {
-            pElement=ll_get(this,i);
-            if(!pFunc(pElement))
+            for(i=0;i<ll_len(this);i++)
             {
-                filteredList=ll_clone(pElement);
+                pElement=ll_get(this,i);
+                if(!pFunc(pElement))
+                {
+                    ll_add(filteredList,pElement);
+                }
             }
         }
     }
